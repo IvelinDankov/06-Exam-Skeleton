@@ -33,10 +33,10 @@ userController.post("/register", authMiddleware.guard, async (req, res) => {
   }
 });
 
-userController.get("/login", (req, res) => {
+userController.get("/login", authMiddleware.guard, (req, res) => {
   res.render("user/login");
 });
-userController.post("/login", async (req, res) => {
+userController.post("/login", authMiddleware.guard, async (req, res) => {
   const { email, password } = req.body;
 
   try {
@@ -48,11 +48,12 @@ userController.post("/login", async (req, res) => {
     res.redirect("/");
   } catch (err) {
     // :TODO handle error
-    res.render("user/login", { email });
+    const error = errorMsg(err);
+    res.render("user/login", { email, error });
   }
 });
 
-userController.get("/logout", (req, res) => {
+userController.get("/logout", authMiddleware.auth, (req, res) => {
   res.clearCookie(AUTH_COOKIE);
 
   res.redirect("/");

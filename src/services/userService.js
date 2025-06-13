@@ -4,7 +4,13 @@ import jwt from "jsonwebtoken";
 import { jwtSecret } from "../utils/userUtils.js";
 
 export default {
-  register(username, email, password) {
+  async register(username, email, password) {
+    const user = await User.findOne({ email });
+
+    if (user) {
+      throw new Error("User already exist!");
+    }
+
     return User.create({
       username,
       email,

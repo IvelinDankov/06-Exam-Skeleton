@@ -30,7 +30,7 @@ function auth(req, res, next) {
 
 function isAuth(req, res, next) {
   if (!req.user) {
-    throw new Error("Access is denied!");
+    res.redirect("/users/login");
   }
 
   next();
@@ -38,7 +38,7 @@ function isAuth(req, res, next) {
 
 function guard(req, res, next) {
   if (req.user) {
-    throw new Error("Access is denied!");
+    res.redirect("/");
   }
 
   next();
