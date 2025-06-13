@@ -1,6 +1,7 @@
 import { create } from "express-handlebars";
+import mongoose from "mongoose";
 
-export default function hbsCofig(app) {
+function hbsCofig(app) {
   /* HBS START */
   const hbs = create({
     extname: "hbs",
@@ -11,3 +12,20 @@ export default function hbsCofig(app) {
   app.set("views", "src/views");
   /* HBS END */
 }
+
+async function mongooseConfig() {
+  let dbName = "Glow";
+
+  try {
+    await mongoose.connect("mongodb://localhost/", { dbName: dbName });
+    console.log(`DB is connected with ${dbName}...`);
+  } catch (err) {
+    console.log(err.message);
+    console.log(`DB is not connected to ${dbName} database!`);
+  }
+}
+
+export default {
+  hbsCofig,
+  mongooseConfig,
+};

@@ -1,15 +1,20 @@
 import express from "express";
+import cookieParser from "cookie-parser";
 
-import hbsCofig from "./config/config.js";
 import routes from "./routes.js";
+import config from "./config/config.js";
+import { port } from "./utils/userUtils.js";
+import auth from "./middlewares/authMiddleware.js";
 
-const port = 3000;
 const app = express();
 
 app.use(express.static("src/public"));
 app.use(express.urlencoded());
+app.use(cookieParser());
+app.use(auth);
 
-hbsCofig(app);
+config.hbsCofig(app);
+config.mongooseConfig();
 
 app.use(routes);
 
