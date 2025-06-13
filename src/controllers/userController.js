@@ -22,7 +22,6 @@ userController.post("/register", authMiddleware.guard, async (req, res) => {
 
     const token = await userService.login(email, password);
 
-    // attach token to cookieParser
     res.cookie(AUTH_COOKIE, token);
 
     res.redirect("/");
@@ -42,12 +41,10 @@ userController.post("/login", authMiddleware.guard, async (req, res) => {
   try {
     const token = await userService.login(email, password);
 
-    // attach token to cookieParser
     res.cookie(AUTH_COOKIE, token);
 
     res.redirect("/");
   } catch (err) {
-    // :TODO handle error
     const error = errorMsg(err);
     res.render("user/login", { email, error });
   }

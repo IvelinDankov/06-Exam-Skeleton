@@ -1,0 +1,34 @@
+<section class="form-container">
+  <h2>Edit Recipe</h2>
+  <form method="post">
+    <label for="name">Product Name:</label>
+    <input type="text" id="name" name="name" value="{{product.name}}" />
+
+    <label for="skin">Skin Type:</label>
+    <textarea id="skin" name="skin">Suitable for: {{product.skin}}</textarea>
+
+    <label for="description">Product Description: </label>
+    <textarea
+      id="description"
+      name="description"
+    >{{product.description}}</textarea>
+
+    <label for="ingredients">Key Ingredients:</label>
+    <textarea
+      id="ingredients"
+      name="ingredients"
+    >{{product.ingrediens}}</textarea>
+
+    <label for="benefits">Benefits:</label>
+    <textarea id="benefits" name="benefits">Intense Hydration:
+      {{product.benefits}}</textarea>
+
+    <label for="price">Price:</label>
+    <input type="number" id="price" name="price" value="{{product.price}}" />
+
+    <label for="image">Image URL:</label>
+    <input type="url" id="image" name="image" value="{{product.image}}" />
+
+    <button type="submit">Create Product Card</button>
+  </form>
+</section>

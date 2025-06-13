@@ -10,6 +10,10 @@ function hbsCofig(app) {
         this.pageTitle = title;
       },
     },
+    runtimeOptions: {
+      allowProtoMethodsByDefault: true,
+      allowProtoPropertiesByDefault: true,
+    },
   });
 
   app.engine("hbs", hbs.engine);
