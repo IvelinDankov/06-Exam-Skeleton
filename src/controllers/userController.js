@@ -46,4 +46,10 @@ userController.post("/login", async (req, res) => {
   } catch (err) {}
 });
 
+userController.get("/logout", (req, res) => {
+  res.clearCookie(AUTH_COOKIE);
+
+  res.redirect("/");
+});
+
 export default userController;

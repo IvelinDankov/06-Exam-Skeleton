@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 
 import { AUTH_COOKIE, jwtSecret } from "../utils/userUtils.js";
 
-export default function auth(req, res, next) {
+function auth(req, res, next) {
   const token = req.cookies[AUTH_COOKIE];
 
   if (!token) {
@@ -25,3 +25,16 @@ export default function auth(req, res, next) {
 
   next();
 }
+
+function isAuth(req, res, next) {
+  if (!req.user) {
+    throw new Error("Access denied!");
+  }
+
+  next();
+}
+
+export default {
+  auth,
+  isAuth,
+};

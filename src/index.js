@@ -4,14 +4,14 @@ import cookieParser from "cookie-parser";
 import routes from "./routes.js";
 import config from "./config/config.js";
 import { port } from "./utils/userUtils.js";
-import auth from "./middlewares/authMiddleware.js";
+import authMiddleware from "./middlewares/authMiddleware.js";
 
 const app = express();
 
 app.use(express.static("src/public"));
 app.use(express.urlencoded());
 app.use(cookieParser());
-app.use(auth);
+app.use(authMiddleware.auth);
 
 config.hbsCofig(app);
 config.mongooseConfig();
