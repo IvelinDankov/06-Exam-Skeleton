@@ -3,15 +3,25 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>GlowAlchemy</title>
+    <title>
+      {{#if pageTitle}}
+        {{pageTitle}}
+      {{else}}
+        GlowAlchemy
+      {{/if}}
+    </title>
     <link rel="stylesheet" href="/styles/styles.css" />
   </head>
 
   <body>
     <header>
       <nav>
+
         <ul>
-          <li><a href="#">Home</a></li>
+          <li>{{#if user}}
+              {{user.username}}
+            {{/if}}</li>
+          <li><a href="/">Home</a></li>
           <li><a href="#">Products</a></li>
           <li><a href="#">Search</a></li>
           {{#if user.isAuthenticated}}
@@ -27,6 +37,12 @@
       </nav>
     </header>
     <main>
+
+      {{#if error}}
+        <div class="error-container">
+          <p> {{error}} </p>
+        </div>
+      {{/if}}
       {{{body}}}
 
     </main>

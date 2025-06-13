@@ -9,17 +9,19 @@ function auth(req, res, next) {
     return next();
   }
 
-  const { id, email } = jwt.verify(token, jwtSecret);
+  const { id, email, username } = jwt.verify(token, jwtSecret);
 
   req.user = {
     id,
     email,
+    username,
     isAuthenticated: true,
   };
 
   res.locals.user = {
     id,
     email,
+    username,
     isAuthenticated: true,
   };
 
@@ -28,7 +30,15 @@ function auth(req, res, next) {
 
 function isAuth(req, res, next) {
   if (!req.user) {
-    throw new Error("Access denied!");
+    throw new Error("Access is denied!");
+  }
+
+  next();
+}
+
+function guard(req, res, next) {
+  if (req.user) {
+    throw new Error("Access is denied!");
   }
 
   next();
@@ -37,4 +47,5 @@ function isAuth(req, res, next) {
 export default {
   auth,
   isAuth,
+  guard,
 };

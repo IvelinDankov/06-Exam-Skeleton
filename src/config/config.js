@@ -5,6 +5,11 @@ function hbsCofig(app) {
   /* HBS START */
   const hbs = create({
     extname: "hbs",
+    helpers: {
+      setTitle(title) {
+        this.pageTitle = title;
+      },
+    },
   });
 
   app.engine("hbs", hbs.engine);

@@ -1,14 +1,16 @@
 import { Router } from "express";
 import userService from "../services/userService.js";
 import { AUTH_COOKIE } from "../utils/userUtils.js";
+import authMiddleware from "../middlewares/authMiddleware.js";
+import errorMsg from "../utils/errorMsg.js";
 
 const userController = Router();
 
-userController.get("/register", (req, res) => {
+userController.get("/register", authMiddleware.guard, (req, res) => {
   res.render("user/register");
 });
 
-userController.post("/register", async (req, res) => {
+userController.post("/register", authMiddleware.guard, async (req, res) => {
   const { username, email, password, rePass } = req.body;
 
   try {
@@ -25,8 +27,9 @@ userController.post("/register", async (req, res) => {
 
     res.redirect("/");
   } catch (err) {
-    // :TODO error handling
-    res.render("user/register", { username, email });
+    const error = errorMsg(err);
+
+    res.render("user/register", { username, email, error });
   }
 });
 
@@ -43,7 +46,10 @@ userController.post("/login", async (req, res) => {
     res.cookie(AUTH_COOKIE, token);
 
     res.redirect("/");
-  } catch (err) {}
+  } catch (err) {
+    // :TODO handle error
+    res.render("user/login", { email });
+  }
 });
 
 userController.get("/logout", (req, res) => {
