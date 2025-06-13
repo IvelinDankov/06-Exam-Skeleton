@@ -1,31 +1,16 @@
 import express from "express";
-import { create } from "express-handlebars";
+
+import hbsCofig from "./config/config.js";
+import routes from "./routes.js";
 
 const port = 3000;
-
 const app = express();
 
-/* HBS START */
-const hbs = create({
-  extname: "hbs",
-  //:TODO
-  // helpers: {
-  //   foo() {
-  //     return "FOO!";
-  //   },
-  //   bar() {
-  //     return "BAR!";
-  //   },
-  // },
-});
+app.use(express.static("src/public"));
+app.use(express.urlencoded());
 
-app.engine("hbs", hbs.engine);
-app.set("view engine", "hbs");
-app.set("views", "src/views");
-/* HBS END */
+hbsCofig(app);
 
-app.get("/", (req, res) => {
-  res.render("home");
-});
+app.use(routes);
 
 app.listen(port, () => console.log(`Server is listening on port ${port}`));
