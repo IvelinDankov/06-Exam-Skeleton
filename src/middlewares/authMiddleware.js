@@ -30,7 +30,7 @@ function auth(req, res, next) {
 
 function isAuth(req, res, next) {
   if (!req.user) {
-    res.redirect("/users/login");
+    return res.redirect("/users/login");
   }
 
   next();
@@ -38,7 +38,7 @@ function isAuth(req, res, next) {
 
 function guard(req, res, next) {
   if (req.user) {
-    res.redirect("/");
+    return res.redirect("/");
   }
 
   next();

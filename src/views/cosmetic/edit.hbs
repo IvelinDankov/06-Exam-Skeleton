@@ -1,3 +1,5 @@
+{{setTitle "Edit Page"}}
+
 <section class="form-container">
   <h2>Edit Recipe</h2>
   <form method="post">
@@ -5,7 +7,7 @@
     <input type="text" id="name" name="name" value="{{product.name}}" />
 
     <label for="skin">Skin Type:</label>
-    <textarea id="skin" name="skin">Suitable for: {{product.skin}}</textarea>
+    <textarea id="skin" name="skin">{{product.skin}}</textarea>
 
     <label for="description">Product Description: </label>
     <textarea
@@ -17,11 +19,10 @@
     <textarea
       id="ingredients"
       name="ingredients"
-    >{{product.ingrediens}}</textarea>
+    >{{product.ingredients}}</textarea>
 
     <label for="benefits">Benefits:</label>
-    <textarea id="benefits" name="benefits">Intense Hydration:
-      {{product.benefits}}</textarea>
+    <textarea id="benefits" name="benefits">{{product.benefits}}</textarea>
 
     <label for="price">Price:</label>
     <input type="number" id="price" name="price" value="{{product.price}}" />

@@ -18,13 +18,13 @@ userController.post("/register", authMiddleware.guard, async (req, res) => {
       throw new Error("Password mismach!");
     }
 
-    const user = await userService.register(username, email, password, rePass);
+    await userService.register(username, email, password, rePass);
 
-    const token = await userService.login(email, password);
+    // const token = await userService.login(email, password);
 
-    res.cookie(AUTH_COOKIE, token);
+    // res.cookie(AUTH_COOKIE, token);
 
-    res.redirect("/");
+    res.redirect("/users/login");
   } catch (err) {
     const error = errorMsg(err);
 
