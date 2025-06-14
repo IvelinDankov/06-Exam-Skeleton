@@ -83,4 +83,12 @@ cosmeticController.get("/:id/delete", async (req, res) => {
   res.redirect("/cosmetics/catalog");
 });
 
+cosmeticController.get("/search", async (req, res) => {
+  const filter = req.query;
+
+  const results = await consmeticService.getAll(filter);
+
+  res.render("search", { results, filter });
+});
+
 export default cosmeticController;

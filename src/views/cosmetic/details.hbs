@@ -32,13 +32,14 @@
     <a href="/cosmetics/{{product.id}}/edit">Edit</a>
     <a href="/cosmetics/{{product.id}}/delete">Delete</a>
   {{else}}
+    {{#if user}}
+      {{#if hasRecommended}}
 
-    {{#if hasRecommended}}
+        <p>You've already recommended this product!</p>
+      {{else}}
+        <a href="/cosmetics/{{product.id}}/recommended">Recommend</a>
 
-      <p>You've already recommended this product!</p>
-    {{else}}
-      <a href="/cosmetics/{{product.id}}/recommended">Recommend</a>
-
+      {{/if}}
     {{/if}}
 
   {{/if}}

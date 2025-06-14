@@ -1,8 +1,16 @@
 import Cosmetics from "../models/cosmeticModel.js";
 
 export default {
-  getAll() {
-    return Cosmetics.find();
+  async getAll(filter = {}) {
+    let result = Cosmetics.find();
+
+    if (filter.search) {
+      result = result.find({
+        name: { $regex: new RegExp(filter.search), $options: "i" },
+      });
+    }
+
+    return result;
   },
 
   create(userId, data) {

@@ -1,0 +1,22 @@
+<section class="search-container">
+  <h2>Search Products</h2>
+  <form method="get">
+    <input
+      type="text"
+      id="search"
+      name="search"
+      placeholder="Search for products..."
+      value="{{filter.search}}"
+    />
+    <button type="submit">Search</button>
+  </form>
+  <div class="search-results">
+    {{#each results}}
+    {{>product}}
+    <!-- Add more search results here -->
+    {{else}}
+    <p class="no-match">There are no products found yet!</p>
+    {{/each}}
+    <!-- <p class="no-match">There are no products found yet!</p> -->
+  </div>
+</section>
